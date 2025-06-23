@@ -3,7 +3,8 @@ import express from 'express';
 import path, { dirname } from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import connectMongoose from './lib/connectMongoose.js'
+import connectMongoose from './lib/connectMongoose.js';
+
 
 import homeRouter from './routes/home.js'
 import usersRouter from './routes/users.js';
@@ -13,7 +14,7 @@ import { fileURLToPath } from 'url';
 import * as sessionManager from './lib/sessionManager.js';
 
 await connectMongoose() // top level await thanks to ES Modules
-console.log('Connected to MongoDB')
+console.log('Connected to MongoDB');
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use('/', homeRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 app.use('/auth', authRouter);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 // catch 404 and forward to error handler

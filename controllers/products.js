@@ -18,7 +18,8 @@ const ProductController = {
     // funcion async que guarda el new product intro
     postNew: async (req, res, next) => {
         try {
-            const { name, price, image } = req.body
+            const { name, price} = req.body
+            const image = req.file?.filename
             const userId = req.session.userId
             const tags = Array.isArray(req.body.tags)
                 ? req.body.tags

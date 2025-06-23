@@ -7,7 +7,8 @@ const productSchema = new Schema({
     owner: { type: Schema.Types.ObjectId, ref: 'User', index: true },
     price: Number,
     image: String,
-    tags: [String]
+    tags: [String],
+    avatar: String
 }, {
     collection: 'products' // para forzar el nombre de la colección
 })

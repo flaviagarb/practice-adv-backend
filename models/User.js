@@ -5,7 +5,8 @@ import bcrypt from 'bcrypt';
 const userSchema = new Schema({
     name: String,
     email: { type: String, required: true, unique: true },
-    password: String
+    password: String,
+    avatar: String
 })
 
 // métodos del modelo

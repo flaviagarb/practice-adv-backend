@@ -1,43 +1,51 @@
 <%- include('header.ejs') %>
 
-<div class="container mt-4">
-  <p>User ID: <%= session.userId %></p>
+  <div class="container mt-4">
 
-  <% if (!session.userId) { %>
-    <% // contenido para usuarios NO logados %>
-    <p><a href="/auth/login">Login</a> to access your products</p>
-  <% } else { %>
-    <h2 class="text-center mb-4">Mis Productos</h2>
+    <% if (user) { %>
+      <p>
+        <img src="<%= user.avatar ? '/uploads/' + user.avatar : 'https://placehold.co/30' %>" width="30" height="30"
+          alt="avatar" class="me-2 rounded-circle" />
+        ¡Hi, <%= user.name %>!
+      </p>
+      <% } %>
 
-    <div class="row justify-content-center">
-      <% products.forEach(product => { %>
-        <div class="col-md-4 mb-4 d-flex">
-          <div class="card shadow-sm w-100">
-            <img 
-              src="<%= product.image %>" 
-              alt="<%= product.name %>" 
-              class="card-img-top" 
-              style="height: 200px; object-fit: cover;"
-            >
-            <div class="card-body">
-              <h5 class="card-title fw-bold"><%= product.name %></h5>
-              <p class="card-text"><strong><%= product.price %> €</strong></p>
-              <div class="d-flex flex-wrap gap-1 mb-2">
-                <% product.tags.forEach(tag => { %>
-                  <span class="badge bg-secondary"><%= tag %></span>
+        <% if (!session.userId) { %>
+          <p><a href="/auth/login">Login</a> to access your products</p>
+          <% } else { %>
+            <h2 class="text-center mb-4">My Products</h2>
+
+            <div class="row justify-content-center">
+              <% products.forEach(product=> { %>
+                <div class="col-md-4 mb-4 d-flex">
+                  <div class="card shadow-sm w-100">
+                    <img src="<%= product.image ? '/images/' + product.image : 'https://placehold.co/200x200' %>"
+                      alt="<%= product.name %>" class="card-img-top" style="height: 200px; object-fit: cover;" />
+                    <div class="card-body">
+                      <h5 class="card-title fw-bold">
+                        <%= product.name %>
+                      </h5>
+                      <p class="card-text"><strong>
+                          <%= product.price %> €
+                        </strong></p>
+                      <div class="d-flex flex-wrap gap-1 mb-2">
+                        <% product.tags.forEach(tag=> { %>
+                          <span class="badge bg-secondary">
+                            <%= tag %>
+                          </span>
+                          <% }) %>
+                      </div>
+                    </div>
+                    <div class="card-footer text-end bg-transparent border-0">
+                      <a href="/products/delete/<%= product._id %>" class="btn btn-danger btn-sm w-100">
+                        <i class="bi bi-trash3 me-1"></i> Eliminar
+                      </a>
+                    </div>
+                  </div>
+                </div>
                 <% }) %>
-              </div>
             </div>
-            <div class="card-footer text-end bg-transparent border-0">
-              <a href="/products/delete/<%= product._id %>" class="btn btn-danger btn-sm w-100">
-                <i class="bi bi-trash3 me-1"></i> Eliminar
-              </a>
-            </div>
-          </div>
-        </div>
-      <% }) %>
-    </div>
-  <% } %>
-</div>
+            <% } %>
+  </div>
 
-<%- include('footer.ejs') %>
+  <%- include('footer.ejs') %>

@@ -3,7 +3,7 @@
   <div class="container">
     <h1>New Product</h1>
 
-    <form method="POST" action="/products/new">
+    <form method="POST" action="/products/new" enctype="multipart/form-data">
 
       <!-- Name -->
       <div class="mb-3">
@@ -14,13 +14,13 @@
       <!-- Price -->
       <div class="mb-3">
         <label for="price" class="form-label">Price</label>
-        <input type="number" name="price" id="price" class="form-control" required min="0">
+        <input type="number" name="price" id="price" class="form-control" required min="0" step="0.01">
       </div>
 
       <!-- Image -->
       <div class="mb-3">
         <label for="image" class="form-label">Image</label>
-        <input type="text" name="image" id="image" class="form-control" placeholder="https://picsum.photos/...">
+        <input type="file" name="image" id="image" class="form-control">
       </div>
 
       <!-- Tags -->
@@ -36,7 +36,6 @@
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>
-
     </form>
   </div>
 

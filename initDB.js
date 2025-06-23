@@ -31,35 +31,35 @@ async function initDBNodepop() {
         {
             name: 'Samsung Galaxy A15',
             price: 500,
-            image: 'https://m.media-amazon.com/images/I/7159IY51UIL._AC_UF1000,1000_QL80_.jpg',
+            image: 'samsung.png',
             tags: ['mobile'],
             owner: user._id
         },
         {
             name: 'Tablet Galaxy S6 Lite',
             price: 100,
-            image: 'https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202404/05/00115217117389____8__1200x1200.jpg',
+            image: 'tablet.png',
             tags: ['mobile', 'lifestyle'],
             owner: user._id
         },
         {
             name: 'TV LG 32LQ',
             price: 200,
-            image: 'https://www.lg.com/content/dam/channel/wcms/es/images/television/55ut73006la_aeuq_eees_es_c/gallery/large1.jpg',
+            image: 'lg.png',
             tags: ['lifestyle'],
             owner: admin._id
         },
         {
             name: 'Gameboy',
-            price: 700,
-            image: 'https://i5.walmartimages.com/seo/Nintendo-GameBoy-Game-Boy-Color-Atomic-Purple-Authentic-100-OEM_af704870-eee2-401a-b2d1-a5b463213a37.3edcbe62993c043ee53a9cc925ef5c40.png',
+            price: 1000,
+            image: 'gameboy.png',
             tags: ['lifestyle', 'mobile'],
             owner: admin._id
         },
         {
             name: 'Iphone 13',
             price: 800,
-            image: 'https://colourmobiletomelloso.es/wp-content/uploads/2021/09/Iphone-13-azul-Colour-Mobile-Tomelloso.jpg',
+            image: 'iphone.png',
             tags: ['mobile'],
             owner: admin._id
         },
@@ -78,12 +78,14 @@ async function initUsers() {
         {
             name: 'Marta Leon',
             email: 'admin@example.com',
-            password: await User.hashPassword('1234')
+            password: await User.hashPassword('1234'),
+            avatar: 'admin.png'
         },
         {
             name: 'Jorge Autin',
             email: 'user@example.com',
-            password: await User.hashPassword('1234')
+            password: await User.hashPassword('1234'),
+            avatar: 'user.png'
         },
     ])
     console.log(`Inserted ${insertResult.length} users.`)

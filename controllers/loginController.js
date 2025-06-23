@@ -22,8 +22,7 @@ export async function postLogin(req, res, next) {
             res.render('login')
             return
         }
-
-        // si el usuario existe y la contraok, redirect a home
+       // si el usuario existe y la contra es ok, redirect a home
         req.session.userId = user.id
 
         res.redirect(redir ? redir : '/')
