@@ -6,14 +6,20 @@
       <p>
         <img src="<%= user.avatar ? '/uploads/' + user.avatar : 'https://placehold.co/30' %>" width="30" height="30"
           alt="avatar" class="me-2 rounded-circle" />
-        ¡Hi, <%= user.name %>!
+        <%= __('Hi') %>, <%= user.name %>!
       </p>
       <% } %>
 
         <% if (!session.userId) { %>
-          <p><a href="/auth/login">Login</a> to access your products</p>
+          <p><a href="/auth/login">
+              <%= __('Login') %>
+            </a>
+            <%= __('to access your products') %>
+          </p>
           <% } else { %>
-            <h2 class="text-center mb-4">My Products</h2>
+            <h2 class="text-center mb-4">
+              <%= __('My Products') %>
+            </h2>
 
             <div class="row justify-content-center">
               <% products.forEach(product=> { %>
@@ -38,7 +44,8 @@
                     </div>
                     <div class="card-footer text-end bg-transparent border-0">
                       <a href="/products/delete/<%= product._id %>" class="btn btn-danger btn-sm w-100">
-                        <i class="bi bi-trash3 me-1"></i> Eliminar
+                        <i class="bi bi-trash3 me-1"></i>
+                        <%= __('Delete') %>
                       </a>
                     </div>
                   </div>
