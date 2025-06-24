@@ -46,7 +46,10 @@ app.use('/api-doc', ...swaggerMiddleware);
 // api routes
 
 app.get('/api/products', apiProductsController.list)
+app.get('/api/products/:productId', apiProductsController.getProductById);
 app.post('/api/products', upload.single('image'), apiProductsController.createProduct);
+app.put('/api/products/:productId', upload.single('avatar'), apiProductsController.update)
+app.delete('/api/products/:productId', apiProductsController.deleteProduct)
 
 // esto es importante: va en orden de prioridades
 app.use(i18n.init)
