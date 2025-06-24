@@ -6,6 +6,7 @@ import logger from 'morgan';
 import connectMongoose from './lib/connectMongoose.js';
 import i18n from './lib/i18nConfigure.js';
 import upload from './lib/uploadConfigure.js';
+import 'dotenv/config'
 
 
 import homeRouter from './routes/home.js'
@@ -16,6 +17,8 @@ import { fileURLToPath } from 'url';
 import * as sessionManager from './lib/sessionManager.js';
 import * as localeController from './controllers/localeController.js';
 import * as apiProductsController from './controllers/api/apiProductsController.js';
+import * as apiLoginController from './controllers/api/apiLoginController.js';
+import * as jwtAuth from './lib/jwtAuthMiddleware.js';
 import swaggerMiddleware from './lib/swaggerMiddleware.js';
 
 
@@ -45,11 +48,12 @@ app.use('/api-doc', ...swaggerMiddleware);
 
 // api routes
 
-app.get('/api/products', apiProductsController.list)
-app.get('/api/products/:productId', apiProductsController.getProductById);
-app.post('/api/products', upload.single('image'), apiProductsController.createProduct);
-app.put('/api/products/:productId', upload.single('image'), apiProductsController.update)
-app.delete('/api/products/:productId', apiProductsController.deleteProduct)
+app.post('/api/login', apiLoginController.loginJWT)
+app.get('/api/products', jwtAuth.guard, apiProductsController.list)
+app.get('/api/products/:productId', jwtAuth.guard, apiProductsController.getProductById);
+app.post('/api/products', jwtAuth.guard, upload.single('image'), apiProductsController.createProduct);
+app.put('/api/products/:productId', jwtAuth.guard, upload.single('image'), apiProductsController.update)
+app.delete('/api/products/:productId', jwtAuth.guard, apiProductsController.deleteProduct)
 
 // esto es importante: va en orden de prioridades
 app.use(i18n.init)
