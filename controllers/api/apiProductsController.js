@@ -54,7 +54,7 @@ export async function createProduct(req, res, next) {
     const productData = req.body;
 
     const product = new Product(productData);
-    product.image = req.file?.filename; // ← aquí estaba mal (era "filterName")
+    product.image = req.file?.filename; 
 
     const savedProduct = await product.save();
 
