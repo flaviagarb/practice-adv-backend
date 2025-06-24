@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import connectMongoose from './lib/connectMongoose.js';
 import i18n from './lib/i18nConfigure.js';
+import upload from './lib/uploadConfigure.js';
 
 
 import homeRouter from './routes/home.js'
@@ -14,6 +15,9 @@ import authRouter from './routes/auth.js';
 import { fileURLToPath } from 'url';
 import * as sessionManager from './lib/sessionManager.js';
 import * as localeController from './controllers/localeController.js';
+import * as apiProductsController from './controllers/api/apiProductsController.js';
+import swaggerMiddleware from './lib/swaggerMiddleware.js';
+
 
 await connectMongoose() // top level await thanks to ES Modules
 console.log('Connected to MongoDB');
@@ -35,6 +39,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // public: acceder directamente desde navegador ; path.join correcto desde cualquier SO ; __dirname ubicacion del archivo actual
 app.use(express.static(path.join(__dirname, 'public')));
+
+// swagger UI
+app.use('/api-doc', ...swaggerMiddleware);
+
+// api routes
+
+app.get('/api/products', apiProductsController.list)
+app.post('/api/products', upload.single('image'), apiProductsController.createProduct);
 
 // esto es importante: va en orden de prioridades
 app.use(i18n.init)
