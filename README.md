@@ -14,6 +14,10 @@ This project is an advanced version of the Nodepop backend built during the Full
 - REST API with full CRUD for products and users
 - API documentation using Swagger UI
 
+## 📌 Deployed URL
+
+[https://backend-nodepop.kcflavia18.duckdns.org](https://backend-nodepop.kcflavia18.duckdns.org)
+
 ## Installation
 
 1. Clone the repository:
